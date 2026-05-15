@@ -1,0 +1,28 @@
+name: inhand_reorient_occluded
+title: TF-WM In-Hand Reorientation Benchmark
+data_dir: data/raw/synthetic
+pattern: episode_*.json
+output_dir: outputs/benchmarks/${eval.name}
+n_seeds: 30
+bootstrap_samples: 1000
+confidence: 0.95
+metrics:
+  - success_rate
+  - steps_to_success
+  - average_return
+  - slip_rate
+  - camera_query_rate
+  - force_violation_rate
+claims:
+  - metric: success_rate
+    operator: ">="
+    target: 0.75
+  - metric: camera_query_rate
+    operator: "<="
+    target: 0.20
+  - metric: slip_rate
+    operator: "<="
+    target: 0.08
+  - metric: force_violation_rate
+    operator: "<="
+    target: 0.01

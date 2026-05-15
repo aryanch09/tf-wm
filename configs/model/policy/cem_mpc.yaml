@@ -1,0 +1,7 @@
+# CEM-MPC policy config
+name: cem_mpc
+horizon: 20
+n_candidates: 256
+n_elites: 32
+n_iterations: 5
+action_bounds: [-1.0, 1.0]

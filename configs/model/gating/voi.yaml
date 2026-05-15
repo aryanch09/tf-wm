@@ -1,0 +1,5 @@
+_target_: tfwm.models.gating.voi_gate.VOIGate
+name: voi
+d_latent: 128
+hidden_dim: 128
+threshold: 0.5

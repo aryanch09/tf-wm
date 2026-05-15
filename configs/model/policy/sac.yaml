@@ -1,0 +1,7 @@
+_target_: tfwm.policies.sac.SACPolicy
+name: sac
+d_latent: 128
+d_action: 6
+action_scale: 1.0
+hidden_dim: 256
+n_layers: 3

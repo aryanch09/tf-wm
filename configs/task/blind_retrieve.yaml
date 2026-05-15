@@ -1,0 +1,10 @@
+name: blind_retrieve
+_target_: tfwm.sim.tasks.blind_retrieve.BlindRetrieveEnv
+n_taxels: 16
+n_channels: 1
+d_proprio: 12
+d_action: 6
+n_objects: 5
+target_object_id: 0
+episode_length: 300
+tactile_noise_std: 0.02

@@ -1,0 +1,14 @@
+# MuJoCo simulation config
+name: mujoco
+dt: 0.01
+substeps: 10
+gravity: -9.81
+tactile:
+  sample_rate_hz: 1000
+  n_taxels: 16
+  n_channels: 1
+  noise_std: 0.01
+domain_rand:
+  friction_range: [0.3, 1.2]
+  mass_scale_range: [0.7, 1.3]
+  object_scale_range: [0.9, 1.1]

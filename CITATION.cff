@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use TF-WM, please cite this software artifact."
+title: "Tactile-First World Models for In-Hand and Occluded Manipulation"
+authors:
+  - name: "TF-WM Contributors"
+year: 2026
+repository-code: "https://github.com/tf-wm/tfwm"
+license: "Apache-2.0"

@@ -1,0 +1,176 @@
+stages:
+  # ------------------------------------------------------------------
+  # External dataset downloads (run once; outputs cached by DVC)
+  # ------------------------------------------------------------------
+  download_sparsh:
+    cmd: python scripts/download_datasets.py --datasets sparsh --root data/external
+    deps:
+      - scripts/download_datasets.py
+    outs:
+      - data/external/sparsh/
+
+  download_touch100k:
+    cmd: python scripts/download_datasets.py --datasets touch100k --root data/external
+    deps:
+      - scripts/download_datasets.py
+    outs:
+      - data/external/touch100k/
+
+  download_vtdexmanip:
+    cmd: python scripts/download_datasets.py --datasets vtdexmanip --root data/external
+    deps:
+      - scripts/download_datasets.py
+    outs:
+      - data/external/vtdexmanip/
+
+  # RH20T and REASSEMBLE require manual download — no DVC stage automates them.
+  # After manual download, run:
+  #   dvc add data/external/rh20t data/external/reassemble
+
+  # ------------------------------------------------------------------
+  # Phase 1 pretraining — uses Sparsh + sim data jointly
+  # ------------------------------------------------------------------
+  phase1_pretrain_sparsh:
+    cmd: >
+      tfwm train
+        train=phase1_repr
+        data=sparsh
+        task=inhand_reorient
+    deps:
+      - src/tfwm/train/phase1_representation.py
+      - src/tfwm/data/datasets/sparsh.py
+      - configs/data/sparsh.yaml
+      - configs/train/phase1_repr.yaml
+      - data/external/sparsh/
+      - data/processed/inhand_reorient/
+    outs:
+      - outputs/phase1_pretrain/checkpoint_final.pt
+
+  # ------------------------------------------------------------------
+  # Simulation data collection
+  # ------------------------------------------------------------------
+  collect_sim:
+    cmd: >
+      tfwm collect
+        task=inhand_reorient
+        sim=mujoco
+        n_episodes=10000
+        output_dir=data/raw/inhand_reorient
+    deps:
+      - src/tfwm/sim/
+      - src/tfwm/sensors/
+      - configs/task/inhand_reorient.yaml
+      - configs/sim/mujoco.yaml
+    outs:
+      - data/raw/inhand_reorient/
+
+  process:
+    cmd: python scripts/make_splits.py data/raw/inhand_reorient data/processed/inhand_reorient --train 0.8 --val 0.1 --test 0.1
+    deps:
+      - scripts/make_splits.py
+      - data/raw/inhand_reorient/
+    outs:
+      - data/processed/inhand_reorient/
+      - data/splits/inhand_reorient.json
+
+  phase1:
+    cmd: tfwm train phase=phase1 task=inhand_reorient sim=mujoco
+    deps:
+      - src/tfwm/train/phase1_representation.py
+      - src/tfwm/models/
+      - src/tfwm/losses/
+      - data/processed/inhand_reorient/
+      - configs/train/phase1_repr.yaml
+    outs:
+      - outputs/phase1/checkpoint_final.pt
+      - outputs/phase1/run.yaml
+
+  phase2:
+    cmd: tfwm train phase=phase2 task=inhand_reorient
+    deps:
+      - src/tfwm/train/phase2_gating.py
+      - outputs/phase1/checkpoint_final.pt
+      - data/processed/inhand_reorient/
+    outs:
+      - outputs/phase2/checkpoint_final.pt
+
+  phase3:
+    cmd: tfwm train phase=phase3 task=inhand_reorient
+    deps:
+      - src/tfwm/train/phase3_auxiliary.py
+      - outputs/phase2/checkpoint_final.pt
+      - data/processed/inhand_reorient/
+    outs:
+      - outputs/phase3/checkpoint_final.pt
+
+  phase4:
+    cmd: tfwm train phase=phase4 task=inhand_reorient
+    deps:
+      - src/tfwm/train/phase4_policy.py
+      - outputs/phase3/checkpoint_final.pt
+    outs:
+      - outputs/phase4/checkpoint_final.pt
+
+  # ------------------------------------------------------------------
+  # Phase 5 sim-to-real fine-tuning on RH20T + REASSEMBLE
+  # (manual download required first — see scripts/download_datasets.py)
+  # ------------------------------------------------------------------
+  phase5_rh20t:
+    cmd: >
+      tfwm train
+        train=phase5_finetune
+        train.real_data=rh20t
+        data=rh20t
+    deps:
+      - src/tfwm/train/phase5_finetune.py
+      - src/tfwm/data/datasets/rh20t.py
+      - configs/data/rh20t.yaml
+      - configs/train/phase5_finetune.yaml
+      - outputs/phase4/checkpoint_final.pt
+    outs:
+      - outputs/phase5_rh20t/checkpoint_final.pt
+
+  phase5_reassemble:
+    cmd: >
+      tfwm train
+        train=phase5_finetune
+        train.real_data=reassemble
+        data=reassemble
+    deps:
+      - src/tfwm/train/phase5_finetune.py
+      - src/tfwm/data/datasets/reassemble.py
+      - configs/data/reassemble.yaml
+      - configs/train/phase5_finetune.yaml
+      - outputs/phase4/checkpoint_final.pt
+    outs:
+      - outputs/phase5_reassemble/checkpoint_final.pt
+
+  phase3_touch100k:
+    cmd: >
+      tfwm train
+        train=phase3_aux
+        data=touch100k
+        task=inhand_reorient
+    deps:
+      - src/tfwm/train/phase3_auxiliary.py
+      - src/tfwm/data/datasets/touch100k.py
+      - configs/data/touch100k.yaml
+      - configs/train/phase3_aux.yaml
+      - data/external/touch100k/
+      - outputs/phase2/checkpoint_final.pt
+    outs:
+      - outputs/phase3_touch100k/checkpoint_final.pt
+
+  eval:
+    cmd: tfwm eval benchmark=all
+    deps:
+      - src/tfwm/eval/
+      - outputs/phase4/checkpoint_final.pt
+    outs:
+      - outputs/eval/benchmark_results.json
+      - outputs/eval/ablation_results.json
+
+plots:
+  - outputs/eval/benchmark_results.json:
+      x: step
+      y: success_rate

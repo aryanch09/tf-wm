@@ -1,0 +1,16 @@
+# Hybrid tactile encoder config
+name: hybrid
+d_z: 128
+tcn:
+  n_layers: 4
+  n_channels: [64, 128, 256, 128]
+  kernel_size: 3
+  dilation_base: 2
+transformer:
+  n_layers: 4
+  n_heads: 8
+  d_model: 128
+  dropout: 0.1
+stochastic_head:
+  n_layers: 2
+  hidden_dim: 256

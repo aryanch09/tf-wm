@@ -1,0 +1,7 @@
+_target_: tfwm.policies.bc.BCPolicy
+name: bc
+d_latent: 128
+d_action: 6
+hidden_dim: 256
+n_layers: 3
+log_std_init: -0.5

@@ -1,0 +1,22 @@
+name: sparsh
+
+# HuggingFace repo: facebook/sparsh
+# Local path after: python scripts/download_datasets.py --datasets sparsh
+root: data/external/sparsh
+split: train
+
+sensor_types:
+  - digit
+  - gelsight_2017
+  - gelsight_mini
+
+n_taxels: 16          # 4×4 mean-pool of tactile image
+max_samples: null     # null = use full 460 k corpus
+
+batch_size: 512       # single-frame samples, large batch is efficient
+num_workers: 8
+pin_memory: true
+
+# Mix ratio when co-training with sim episodes (Phase 1)
+# 0.3 means 30% of each batch comes from Sparsh
+external_weight: 0.3

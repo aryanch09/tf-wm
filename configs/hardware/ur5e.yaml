@@ -1,0 +1,10 @@
+name: ur5e
+n_joints: 6
+d_action: 6
+d_proprio: 18
+tactile_sensor: gelsight
+n_taxels: 16
+n_channels: 3
+control_rate_hz: 500
+tactile_rate_hz: 30
+gripper: robotiq_2f85

@@ -1,0 +1,19 @@
+name: domain_rand
+
+physics:
+  friction_range: [0.3, 1.2]
+  mass_scale_range: [0.7, 1.3]
+  object_scale_range: [0.9, 1.1]
+  gravity_scale_range: [0.95, 1.05]
+
+tactile:
+  noise_std_range: [0.001, 0.05]
+  dropout_prob: 0.05
+  calibration_offset_std: 0.02
+  sampling_jitter_ms: 2.0
+  drift_alpha: 0.01          # 1st-order Markov drift coefficient
+
+rendering:
+  lighting_intensity_range: [0.5, 1.5]
+  texture_variant_count: 8
+  background_randomise: true

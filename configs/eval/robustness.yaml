@@ -1,0 +1,17 @@
+name: robustness
+n_episodes: 50
+seed: 42
+
+sweeps:
+  occlusion:
+    variable: occlusion_prob
+    values: [0.0, 0.25, 0.5, 0.75, 0.9]
+  noise:
+    variable: tactile_noise_std
+    values: [0.0, 0.005, 0.01, 0.05, 0.1]
+  sample_rate:
+    variable: sample_rate_hz
+    values: [100, 500, 1000, 5000]
+  novel_objects:
+    variable: n_objects
+    values: [3, 5, 10, 20]

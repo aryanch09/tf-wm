@@ -1,0 +1,13 @@
+episode_id,path,split,task_name,sim_name,seed,steps,success,camera_queries,slip_events
+0,data/raw/synthetic/episode_00000.json,train,inhand_reorient,synthetic,7,48,True,5,1
+1,data/raw/synthetic/episode_00001.json,train,inhand_reorient,synthetic,8,48,True,5,0
+2,data/raw/synthetic/episode_00002.json,train,inhand_reorient,synthetic,9,48,True,5,1
+3,data/raw/synthetic/episode_00003.json,train,inhand_reorient,synthetic,10,48,True,6,4
+4,data/raw/synthetic/episode_00004.json,train,inhand_reorient,synthetic,11,48,True,5,0
+5,data/raw/synthetic/episode_00005.json,train,inhand_reorient,synthetic,12,48,True,5,0
+6,data/raw/synthetic/episode_00006.json,train,inhand_reorient,synthetic,13,48,True,5,1
+7,data/raw/synthetic/episode_00007.json,train,inhand_reorient,synthetic,14,48,True,5,0
+8,data/raw/synthetic/episode_00008.json,train,inhand_reorient,synthetic,15,48,True,5,2
+9,data/raw/synthetic/episode_00009.json,val,inhand_reorient,synthetic,16,48,True,7,3
+10,data/raw/synthetic/episode_00010.json,val,inhand_reorient,synthetic,17,48,True,6,3
+11,data/raw/synthetic/episode_00011.json,val,inhand_reorient,synthetic,18,48,True,5,1

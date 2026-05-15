@@ -1,0 +1,8 @@
+# VAE dynamics config
+name: vae
+d_z: 128
+n_layers: 3
+hidden_dim: 512
+dropout: 0.1
+horizon: 20
+n_aux: 10  # contact logits, etc.

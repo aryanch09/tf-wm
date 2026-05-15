@@ -1,0 +1,6 @@
+_target_: tfwm.models.vision.ViTEncoder
+name: vit_s
+model_name: vit_small_patch16_224
+pretrained: true
+d_out: 384
+freeze_backbone: false

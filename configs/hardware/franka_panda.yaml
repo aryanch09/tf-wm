@@ -1,0 +1,11 @@
+name: franka_panda
+n_joints: 7
+d_action: 7
+d_proprio: 21  # q, dq, tau
+tactile_sensor: reskin
+n_taxels: 5
+n_channels: 3
+control_rate_hz: 1000
+tactile_rate_hz: 400
+gripper_dof: 1
+end_effector: panda_hand

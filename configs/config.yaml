@@ -1,0 +1,23 @@
+defaults:
+  - _self_
+  - model/tactile_encoder: hybrid
+  - model/vision_encoder: resnet18
+  - model/dynamics: vae
+  - model/gating: hybrid
+  - model/policy: cem_mpc
+  - task: inhand_reorient
+  - sim: isaac
+  - data: collection
+  - train: phase1_repr
+  - eval: benchmark
+  - hardware: allegro
+
+seed: 42
+precision: bf16
+device: cuda
+run_name: ${task.name}_${model.dynamics.name}_${now:%Y%m%d_%H%M%S}
+output_dir: outputs/${run_name}
+wandb:
+  project: tf-wm
+  entity: null
+  mode: offline

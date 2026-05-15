@@ -1,0 +1,22 @@
+name: reassemble
+
+# Paper: arXiv:2502.05086 — check paper for access instructions
+# Extract to data/external/reassemble/
+root: data/external/reassemble
+split_json: data/external/reassemble/splits.json
+split: train
+
+# null = include all assembly task types
+tasks: null
+
+success_only: true     # 4035/4551 successful demos
+seq_length: 50
+stride: 10
+max_force_n: 30.0      # assembly tasks have higher contact forces
+d_proprio: 12
+
+batch_size: 64
+num_workers: 4
+pin_memory: true
+
+max_real_episodes: 500

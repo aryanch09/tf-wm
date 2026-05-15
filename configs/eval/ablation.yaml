@@ -1,0 +1,20 @@
+name: ablation
+n_episodes: 100
+n_bootstrap: 10000
+seed: 42
+
+variants:
+  - vision_only
+  - symmetric_fusion
+  - tactile_only_reactive
+  - tfwm_no_gating
+  - tfwm_no_vision
+  - tfwm_force_magnitude_only
+  - tfwm_rate_100hz
+  - tfwm_rate_500hz
+  - tfwm_rate_1000hz
+  - tfwm_rate_5000hz
+
+occlusion_levels: [0.0, 0.5, 0.9]
+noise_levels: [0.0, 0.01, 0.05, 0.1]
+sample_rates: [100, 500, 1000, 5000]

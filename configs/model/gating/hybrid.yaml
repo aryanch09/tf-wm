@@ -1,0 +1,6 @@
+# Hybrid gating config
+name: hybrid
+variance_threshold: 0.5
+voi_threshold: 0.7
+n_layers: 2
+hidden_dim: 128

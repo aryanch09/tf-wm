@@ -1,0 +1,6 @@
+_target_: tfwm.models.dynamics.EnsembleDynamics
+name: ensemble
+n_members: 5
+d_latent: 128
+d_action: 6
+d_recurrent: 256

@@ -1,0 +1,20 @@
+name: vtdexmanip
+
+# Cloned by: python scripts/download_datasets.py --datasets vtdexmanip
+root: data/external/vtdexmanip
+split: train           # uses splits.json if present, else random 80/10/10
+
+# null = include all 10 tasks
+tasks: null
+
+seq_length: 50
+stride: 10
+n_taxels: 16           # resampled from native sensor count
+d_proprio: 12
+success_only: false    # include failures for contrastive learning
+
+batch_size: 64
+num_workers: 4
+pin_memory: true
+
+max_real_episodes: 500

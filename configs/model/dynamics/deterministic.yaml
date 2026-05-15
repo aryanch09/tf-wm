@@ -1,0 +1,5 @@
+_target_: tfwm.models.dynamics.DeterministicDynamics
+name: deterministic
+d_latent: 128
+d_action: 6
+hidden_dims: [256, 256]

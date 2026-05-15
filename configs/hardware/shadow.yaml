@@ -1,0 +1,10 @@
+name: shadow_hand
+n_fingers: 5
+n_joints: 24
+d_action: 24
+d_proprio: 72  # q, dq, tau per joint
+tactile_sensor: digit
+n_taxels_per_finger: 16
+n_channels: 3
+control_rate_hz: 200
+tactile_rate_hz: 60

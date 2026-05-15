@@ -1,0 +1,23 @@
+phase: phase2
+batch_size: 128
+learning_rate: 3e-4
+max_steps: 50000
+log_every: 500
+eval_every: 2000
+save_every: 5000
+
+# Freeze encoder and dynamics; only train gate.
+trainable: [gate]
+frozen: [encoder, dynamics, tactile_decoder, contact_head]
+
+loss:
+  voi_mse_weight: 1.0
+  query_bce_weight: 0.5
+
+voi:
+  camera_cost: 0.1        # reward penalty per camera query
+  oracle_label_source: contact_events  # proxy for VOI oracle
+
+calibration:
+  ece_target: 0.05        # stop when ECE < 0.05
+  n_bins: 10

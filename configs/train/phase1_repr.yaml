@@ -1,0 +1,37 @@
+# Phase 1 representation learning config
+phase: phase1
+batch_size: 256
+learning_rate: 1e-3
+max_steps: 100000
+
+# External tactile pretraining data (optional — set to null to use sim only)
+# Override with: data=sparsh  or  data=collection
+external_tactile:
+  enabled: true
+  dataset: sparsh      # matches configs/data/sparsh.yaml name
+  weight: 0.3          # fraction of each batch from external data
+log_every: 1000
+eval_every: 5000
+save_every: 10000
+
+loss:
+  alpha_recon: 1.0
+  alpha_cpc: 1.0
+  alpha_event: 0.1
+  alpha_kl: 0.1
+  alpha_aff: 0.0
+  alpha_obj: 0.0
+
+cpc:
+  n_negatives: 64
+  temperature: 0.1
+
+kl:
+  anneal_start: 0.0
+  anneal_end: 1.0
+  anneal_steps: 20000
+
+scheduled_sampling:
+  start_epsilon: 1.0
+  end_epsilon: 0.1
+  decay_steps: 100000

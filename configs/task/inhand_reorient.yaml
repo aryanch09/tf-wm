@@ -1,0 +1,5 @@
+# In-hand reorientation task config
+name: inhand_reorient
+max_steps: 100
+success_threshold: 0.1  # radians
+occlusion_levels: [0.0, 0.3, 0.6, 0.9]  # fraction of view occluded

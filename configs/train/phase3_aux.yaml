@@ -1,0 +1,23 @@
+phase: phase3
+batch_size: 128
+learning_rate: 1e-4
+max_steps: 50000
+log_every: 500
+eval_every: 2000
+save_every: 5000
+
+# Fine-tune encoders; train affordance and object-state heads.
+trainable: [encoder, affordance_head, object_state_head]
+frozen: [dynamics, contact_head]
+
+loss:
+  alpha_affordance: 1.0
+  alpha_object_state: 0.5
+  alpha_recon: 0.1      # keep reconstruction alive
+
+# External language-annotated tactile data for affordance head supervision
+# Uses configs/data/touch100k.yaml
+external_language:
+  enabled: true
+  dataset: touch100k
+  weight: 0.2

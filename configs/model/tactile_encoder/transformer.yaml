@@ -1,0 +1,10 @@
+_target_: tfwm.models.tactile_encoder.transformer.TransformerTactileEncoder
+name: transformer
+n_taxels: 16
+n_channels: 1
+d_latent: 128
+d_model: 256
+n_heads: 8
+n_layers: 4
+d_ff: 512
+dropout: 0.1

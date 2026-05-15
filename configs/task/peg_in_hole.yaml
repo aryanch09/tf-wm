@@ -1,0 +1,13 @@
+name: peg_in_hole
+_target_: tfwm.sim.tasks.peg_in_hole.PegInHoleEnv
+n_taxels: 16
+n_channels: 1
+d_proprio: 12
+d_action: 6
+hole_radius: 0.01
+peg_radius: 0.009
+max_insertion_depth: 0.05
+episode_length: 200
+occlusion_prob: 0.8
+tactile_noise_std: 0.01
+success_thresh: 0.95  # fraction of max depth

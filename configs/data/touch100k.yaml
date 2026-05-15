@@ -1,0 +1,26 @@
+name: touch100k
+
+# HuggingFace repo: cocacola-lab/Touch100k
+# Local path after: python scripts/download_datasets.py --datasets touch100k
+repo_id: cocacola-lab/Touch100k
+local_dir: data/external/touch100k
+split: train
+streaming: true       # stream from HuggingFace; set false if fully downloaded
+
+n_taxels: 16          # 4×4 mean-pool of GelSight image
+max_samples: null     # null = use all 100 k pairs
+
+batch_size: 256
+num_workers: 4
+pin_memory: true
+
+# Used in Phase 3 auxiliary head training
+# contact_type label → AffordanceHead classification target
+contact_types:
+  - pinch
+  - press
+  - slide
+  - roll
+  - twist
+  - hold
+  - other

@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Environments
+.venv/
+venv/
+env/
+ENV/
+.env
+
+# Editors / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test / lint caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Docs build
+site/
+
+# Hydra / experiment outputs (keep the demo benchmark report)
+outputs/*/
+!outputs/benchmarks/
+.hydra/
+
+# DVC
+/.dvc/cache
+/.dvc/tmp
+
+# Large artefacts
+*.ckpt
+*.pt
+*.pth
+*.npz
+*.h5
+*.pkl
+
+# Notebooks
+.ipynb_checkpoints/
+
+# LaTeX (paper sources kept separately)
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.synctex.gz

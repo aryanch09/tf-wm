@@ -1,0 +1,31 @@
+phase: phase5
+batch_size: 32
+learning_rate: 1e-5       # low LR for real data fine-tuning
+max_steps: 50000
+log_every: 100
+eval_every: 500
+save_every: 2000
+
+max_real_episodes: 500   # H-C: ≤500 real episodes per task
+
+# Real dataset to fine-tune on — override with e.g. real_data=vtdexmanip
+# Valid values: rh20t | vtdexmanip | reassemble  (match configs/data/*.yaml names)
+real_data: rh20t
+
+loss:
+  alpha_recon: 1.0
+  alpha_cpc: 0.5
+  alpha_event: 0.1
+  alpha_kl: 0.05
+
+domain_adversarial:
+  enabled: true
+  gradient_reversal_lambda: 0.1
+  n_classes: 2             # sim vs real
+
+ema:
+  enabled: true
+  decay: 0.999
+
+sim_to_real:
+  success_gap_target: 0.10  # real success ≥ sim success − 10%

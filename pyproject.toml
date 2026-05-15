@@ -1,0 +1,143 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tfwm"
+version = "0.0.1"
+description = "Tactile-first world models for in-hand and occluded manipulation."
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "torch>=2.0.0,<3.0.0",
+    "torchvision>=0.15.0,<0.16.0",
+    "hydra-core>=1.3.0,<1.4.0",
+    "omegaconf>=2.3.0,<2.4.0",
+    "einops>=0.6.0,<0.7.0",
+    "rich>=13.0.0,<14.0.0",
+    "gymnasium>=0.28.0,<1.0.0",
+    "pydantic>=2.0.0,<2.1.0",
+    "numpy>=1.26.0,<2.0.0",
+    "pandas>=2.0.0,<3.0.0",
+    "pyarrow>=14.0.0,<15.0.0",
+    "h5py>=3.0.0,<4.0.0",
+    "mujoco>=3.8.0,<4.0.0",
+    "pytest>=7.0.0,<8.0.0",
+    "hypothesis>=6.0.0,<7.0.0",
+    "pytest-benchmark>=4.0.0,<5.0.0",
+    "ruff>=0.1.0,<0.2.0",
+    "black>=23.0.0,<24.0.0",
+    "mypy>=1.0.0,<2.0.0",
+    "pre-commit>=3.0.0,<4.0.0",
+    "mkdocs-material>=9.0.0,<10.0.0",
+    "mkdocstrings[python]>=0.20.0,<0.21.0",
+]
+
+[project.scripts]
+tfwm = "tfwm.cli.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+select = ["E", "F", "W", "C90", "I", "N", "UP", "YTT", "S", "BLE", "FBT", "B", "A", "COM", "C4", "DTZ", "T10", "DJ", "EM", "EXE", "FA", "ISC", "ICN", "G", "INP", "PIE", "T20", "PYI", "PT", "Q", "RSE", "RET", "SLF", "SLOT", "SIM", "TID", "TCH", "INT", "ARG", "PTH", "ERA", "PD", "PGH", "PL", "TRY", "FLY", "NPY", "AIR", "PERF", "RUF"]
+ignore = [
+    "S101",
+    "COM812",
+    "ISC001",
+    "TCH",
+    "TID252",
+    "TRY003",
+    "EM101",
+    "EM102",
+    "PLR0913",
+    "PLR2004",
+    "PERF401",
+    "N806",
+    "RET504",
+    "PLW3301",
+    "SIM118",
+    "B008",
+    "ERA001",
+    "PTH123",
+    "TRY004",
+    "ARG",
+    "FBT003",
+    "N803",
+    "SIM108",
+    "N812",
+    "RUF012",
+    "BLE001",
+    "A002",
+    "S603",
+    "S607",
+    "G004",
+    "E501",
+    "S311",
+    "NPY002",
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
+"scripts/**/*" = ["T201", "S603"]
+"tests/**/*" = ["S101", "PLR2004", "INP001", "FBT", "PT018", "S108", "PTH123", "B007"]
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+ignore_missing_imports = false
+
+[[tool.mypy.overrides]]
+module = "torch.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "wandb.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "einops.*"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "property: marks tests as property-based tests",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/tests/*", "*/test_*.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+]

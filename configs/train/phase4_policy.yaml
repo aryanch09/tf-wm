@@ -1,0 +1,28 @@
+phase: phase4
+batch_size: 256
+learning_rate: 3e-4
+max_steps: 200000
+log_every: 1000
+eval_every: 10000
+save_every: 20000
+
+policy_type: sac   # sac | bc | mpc
+
+# BC warm-start then SAC fine-tuning.
+bc:
+  n_steps: 20000
+  lr: 3e-4
+
+sac:
+  gamma: 0.99
+  tau: 0.005
+  alpha: 0.2
+  auto_alpha: true
+  buffer_size: 1000000
+  batch_size: 256
+  update_every: 1
+  warmup_steps: 5000
+
+safety:
+  penalty_weight: 0.1
+  force_thresh_N: 10.0

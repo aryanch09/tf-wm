@@ -1,0 +1,9 @@
+data/raw/synthetic/episode_00008.json
+data/raw/synthetic/episode_00007.json
+data/raw/synthetic/episode_00000.json
+data/raw/synthetic/episode_00010.json
+data/raw/synthetic/episode_00005.json
+data/raw/synthetic/episode_00001.json
+data/raw/synthetic/episode_00006.json
+data/raw/synthetic/episode_00009.json
+data/raw/synthetic/episode_00003.json

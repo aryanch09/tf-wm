@@ -1,0 +1,5 @@
+_target_: tfwm.planning.hierarchical.HierarchicalPlanner
+name: hierarchical
+replan_every: 5
+n_affordance_nodes: 8
+d_latent: 128
