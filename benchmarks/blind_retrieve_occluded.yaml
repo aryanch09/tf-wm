@@ -1,0 +1,32 @@
+name: blind_retrieve_occluded
+task: blind_retrieve
+condition: full visual occlusion; retrieval driven by tactile contact only
+episode_count: 30
+seeds: 30
+metrics:
+  primary:
+    - success_rate
+    - camera_query_rate
+  secondary:
+    - steps_to_success
+    - average_return
+    - slip_rate
+    - force_violation_rate
+claims:
+  success_rate:
+    operator: ">="
+    target: 0.75
+  camera_query_rate:
+    operator: "<="
+    target: 0.25
+  slip_rate:
+    operator: "<="
+    target: 0.10
+  force_violation_rate:
+    operator: "<="
+    target: 0.01
+baselines:
+  - tactile_only_world_model
+  - vision_always_multimodal_policy
+  - heuristic_uncertainty_gate
+  - oracle_query_schedule

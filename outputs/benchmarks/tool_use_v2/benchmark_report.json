@@ -1,0 +1,70 @@
+{
+  "metadata": {
+    "episodes": 30,
+    "confidence": 0.95,
+    "bootstrap_samples": 1000,
+    "fingerprint": "2c53bc4055d4da3fdf952aac52b030ccce8c6b737c05099c2ca2d6fec6a8652d"
+  },
+  "metrics": {
+    "success_rate": {
+      "mean": 0.9666666666666667,
+      "ci_low": 0.9,
+      "ci_high": 1.0
+    },
+    "steps_to_success": {
+      "mean": 48.0,
+      "ci_low": 48.0,
+      "ci_high": 48.0
+    },
+    "average_return": {
+      "mean": 14.089539273579915,
+      "ci_low": 13.995334964593251,
+      "ci_high": 14.192556441624959
+    },
+    "slip_rate": {
+      "mean": 0.03958333333333333,
+      "ci_low": 0.029861111111111113,
+      "ci_high": 0.05
+    },
+    "camera_query_rate": {
+      "mean": 0.12013888888888889,
+      "ci_low": 0.11527777777777778,
+      "ci_high": 0.125
+    },
+    "force_violation_rate": {
+      "mean": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0
+    }
+  },
+  "claim_checks": [
+    {
+      "metric": "success_rate",
+      "operator": ">=",
+      "target": 0.75,
+      "value": 0.9666666666666667,
+      "passed": true
+    },
+    {
+      "metric": "camera_query_rate",
+      "operator": "<=",
+      "target": 0.2,
+      "value": 0.12013888888888889,
+      "passed": true
+    },
+    {
+      "metric": "slip_rate",
+      "operator": "<=",
+      "target": 0.08,
+      "value": 0.03958333333333333,
+      "passed": true
+    },
+    {
+      "metric": "force_violation_rate",
+      "operator": "<=",
+      "target": 0.01,
+      "value": 0.0,
+      "passed": true
+    }
+  ]
+}
